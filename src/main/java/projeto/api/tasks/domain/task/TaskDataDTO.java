@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public record TaskRegisterDataDTO(
+public record TaskDataDTO(
         @NotBlank
         String name,
         @NotNull

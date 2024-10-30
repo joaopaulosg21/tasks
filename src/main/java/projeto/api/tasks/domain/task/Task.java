@@ -23,7 +23,7 @@ public class Task {
 
     public Task(){}
 
-    public Task(TaskRegisterDataDTO data, Long presentationOrder) {
+    public Task(TaskDataDTO data, Long presentationOrder) {
         this.name = data.name();
         this.cost = data.cost();
         this.deadline = data.deadline();

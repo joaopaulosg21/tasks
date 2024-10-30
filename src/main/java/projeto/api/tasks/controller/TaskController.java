@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import projeto.api.tasks.domain.task.Task;
-import projeto.api.tasks.domain.task.TaskRegisterDataDTO;
+import projeto.api.tasks.domain.task.TaskDataDTO;
 import projeto.api.tasks.domain.task.TaskService;
 
 import java.net.URI;
@@ -24,7 +24,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<Task> add(@Valid @RequestBody TaskRegisterDataDTO data, UriComponentsBuilder builder) {
+    public ResponseEntity<Task> add(@Valid @RequestBody TaskDataDTO data, UriComponentsBuilder builder) {
         Task task = service.add(data);
         URI uri = builder.path("/task/{id}").buildAndExpand(task.getId()).toUri();
 
