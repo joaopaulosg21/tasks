@@ -1,5 +1,7 @@
 package projeto.api.tasks.domain.task;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import projeto.api.tasks.domain.task.validations.TaskValidation;
 
@@ -51,5 +53,9 @@ public class TaskService {
         repository.delete(task);
 
         return new ResponseDTO(task, "Tarefa deletada com sucesso!!");
+    }
+
+    public Page<Task> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 }

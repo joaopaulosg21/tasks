@@ -1,6 +1,10 @@
 package projeto.api.tasks.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -37,5 +41,10 @@ public class TaskController {
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseDTO> delete(@PathVariable Long id) {
         return ResponseEntity.ok(service.delete(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<Task>> findAll(@PageableDefault(sort = "presentationOrder",direction = Sort.Direction.ASC) Pageable pageable) {
+        return ResponseEntity.ok(service.findAll(pageable));
     }
 }
