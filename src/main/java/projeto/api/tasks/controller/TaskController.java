@@ -33,4 +33,9 @@ public class TaskController {
     public ResponseEntity<ResponseDTO> update(@Valid @RequestBody TaskDataDTO data, @PathVariable Long id) {
         return ResponseEntity.ok(service.update(data,id));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResponseDTO> delete(@PathVariable Long id) {
+        return ResponseEntity.ok(service.delete(id));
+    }
 }

@@ -33,7 +33,7 @@ public class TaskService {
         task.setDeadline(data.deadline());
 
         Task updatedTask = repository.save(task);
-        return new ResponseDTO(updatedTask, "Tarefa atualizada com sucesso");
+        return new ResponseDTO(updatedTask, "Tarefa atualizada com sucesso!!");
     }
 
     private Task findById(Long id) {
@@ -44,5 +44,12 @@ public class TaskService {
         }
 
         return optionalTask.get();
+    }
+
+    public ResponseDTO delete(Long id) {
+        Task task = this.findById(id);
+        repository.delete(task);
+
+        return new ResponseDTO(task, "Tarefa deletada com sucesso!!");
     }
 }
