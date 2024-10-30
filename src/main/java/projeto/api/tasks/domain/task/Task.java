@@ -3,7 +3,7 @@ package projeto.api.tasks.domain.task;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Table(name = "tasks")
 @Entity
@@ -17,9 +17,18 @@ public class Task {
 
     private BigDecimal cost;
 
-    private LocalDateTime deadline;
+    private LocalDate deadline;
 
     private Long presentationOrder;
+
+    public Task(){}
+
+    public Task(TaskRegisterDataDTO data, Long presentationOrder) {
+        this.name = data.name();
+        this.cost = data.cost();
+        this.deadline = data.deadline();
+        this.presentationOrder = presentationOrder;
+    }
 
     public Long getId() {
         return id;
@@ -53,11 +62,11 @@ public class Task {
         this.presentationOrder = presentationOrder;
     }
 
-    public LocalDateTime getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(LocalDateTime deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 }
