@@ -2,11 +2,9 @@ package projeto.api.tasks.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import projeto.api.tasks.domain.task.ResponseDTO;
 import projeto.api.tasks.domain.task.Task;
 import projeto.api.tasks.domain.task.TaskDataDTO;
 import projeto.api.tasks.domain.task.TaskService;
@@ -31,4 +29,8 @@ public class TaskController {
         return ResponseEntity.created(uri).body(task);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<ResponseDTO> update(@Valid @RequestBody TaskDataDTO data, @PathVariable Long id) {
+        return ResponseEntity.ok(service.update(data,id));
+    }
 }
