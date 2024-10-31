@@ -1,5 +1,3 @@
-CREATE SEQUENCE presentation_order_seq;
-
 CREATE TABLE tasks(
     id SERIAL NOT NULL,
     NAME VARCHAR(150) NOT NULL,

@@ -21,7 +21,12 @@ public class TaskService {
     }
 
     public Task add(TaskDataDTO data) {
-        Task task = new Task(data,repository.getNextPresentationOrder());
+        Optional<Task> optionalTask = repository.tasksByPresentation();
+        long value = 0;
+        if (optionalTask.isPresent()) {
+            value = optionalTask.get().getPresentationOrder() + 1;
+        }
+        Task task = new Task(data, value);
         this.validations.forEach(v -> v.valid(data));
         return repository.save(task);
     }
@@ -41,7 +46,7 @@ public class TaskService {
     private Task findById(Long id) {
         Optional<Task> optionalTask = repository.findById(id);
 
-        if(optionalTask.isEmpty()) {
+        if (optionalTask.isEmpty()) {
             throw new TaskNotFoundException("Tarefa com id solicitado não registrada");
         }
 
@@ -57,5 +62,11 @@ public class TaskService {
 
     public Page<Task> findAll(Pageable pageable) {
         return repository.findAll(pageable);
+    }
+
+    public Task updateOrder(Long taskId, TaskUpdateOrderDTO orderDTO) {
+        Task task = this.findById(taskId);
+        task.setPresentationOrder(orderDTO.presentationOrder());
+        return repository.save(task);
     }
 }

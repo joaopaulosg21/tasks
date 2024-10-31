@@ -12,6 +12,7 @@ import projeto.api.tasks.domain.task.ResponseDTO;
 import projeto.api.tasks.domain.task.Task;
 import projeto.api.tasks.domain.task.TaskDataDTO;
 import projeto.api.tasks.domain.task.TaskService;
+import projeto.api.tasks.domain.task.TaskUpdateOrderDTO;
 
 import java.net.URI;
 
@@ -46,5 +47,10 @@ public class TaskController {
     @GetMapping
     public ResponseEntity<Page<Task>> findAll(@PageableDefault(sort = "presentationOrder",direction = Sort.Direction.ASC) Pageable pageable) {
         return ResponseEntity.ok(service.findAll(pageable));
+    }
+
+    @PatchMapping("order/{id}")
+    public ResponseEntity<Task> updateOrder(@Valid @RequestBody TaskUpdateOrderDTO orderDTO, @PathVariable Long id) {
+        return ResponseEntity.ok(service.updateOrder(id,orderDTO));
     }
 }
