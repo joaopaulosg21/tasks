@@ -45,7 +45,7 @@ public class TaskController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Task>> findAll(@PageableDefault(sort = "presentationOrder",direction = Sort.Direction.ASC) Pageable pageable) {
+    public ResponseEntity<Page<Task>> findAll(@PageableDefault(sort = "presentationOrder",direction = Sort.Direction.ASC, size = 1000) Pageable pageable) {
         return ResponseEntity.ok(service.findAll(pageable));
     }
 
