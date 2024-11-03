@@ -32,9 +32,16 @@ public class TaskService {
     }
 
     public ResponseDTO update(TaskDataDTO data, Long id) {
-        this.validations.forEach(v -> v.valid(data));
         Task task = this.findById(id);
 
+        if (data.name().equalsIgnoreCase(task.getName())) {
+            task.setCost(data.cost());
+            task.setDeadline(data.deadline());
+
+            Task updatedTask = repository.save(task);
+            return new ResponseDTO(updatedTask, "Tarefa atualizada com sucesso!!");
+        }
+        validations.forEach(v -> v.valid(data));
         task.setName(data.name());
         task.setCost(data.cost());
         task.setDeadline(data.deadline());
